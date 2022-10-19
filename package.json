@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/Vex-Holdings/saasmap/issues"
   },
-  "homepage": "https://github.com/Vex-Holdings/saasmap#readme"
+  "homepage": "https://github.com/Vex-Holdings/saasmap#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mustache-express": "^1.3.2",
+    "pg": "^8.8.0",
+    "pg-promise": "^10.12.1",
+    "sequelize": "^6.25.2",
+    "serve-favicon": "^2.5.0"
+  }
 }
