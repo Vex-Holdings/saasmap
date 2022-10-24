@@ -1,0 +1,25 @@
+{{> header}}
+<title>SaaS Map Register</title>
+</head>
+<body>
+    <div class="container">
+    {{> menu}}
+        <h1>SaaS Map Project - Register</h1>
+        <form action="/register" method="POST">
+            <div class="row">
+                <div class="col-4">
+                    <label for="inputUsername" class="form-label">User Name</label>
+                    <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Enter User Name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Enter a password">
+                </div>
+            </div>
+            <input type="hidden" id="status" name="status" value="user">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+{{> footer}}
