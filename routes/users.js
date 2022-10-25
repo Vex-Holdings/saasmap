@@ -21,5 +21,52 @@ router.get('/add-organization', (req, res) => {
 
 // POST Pages
 
+router.post('/add-organization', async (req,res) => {
+    const orgname = req.body.orgname
+    const description = req.body.description
+    const location = req.body.location
+    const website = req.body.website
+
+    const neworg = await models.Organization.build({
+        orgname: orgname,
+        description: description,
+        location: location,
+        website: website
+    })
+    let savedOrg = await neworg.save()
+    if(savedOrg != null) {
+        res.redirect('/users/admin')
+    } else {
+        res.render('users/add-organization',{message: 'Error adding new organization to the database'})
+    }
+})
+
+router.post('/add-person', async (req,res) => {
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const location = req.body.location
+    const linkedin = req.body.linkedin
+    const twitter = req.body.twitter
+    const email = req.body.email
+    const source = req.body.source
+    const userid = req.session.user.userId
+
+    const newperson = await models.Organization.build({
+        firstname: firstname,
+        lastname: lastname,
+        location: location,
+        linkedin: linkedin,
+        twitter: twitter,
+        email: email,
+        source: source,
+        userid: userid
+    })
+    let savedPerson = await newperson.save()
+    if(savedPerson != null) {
+        res.redirect('/users/admin')
+    } else {
+        res.render('users/add-person',{message: 'Error adding new person to the database'})
+    }
+})
 
 module.exports = router;
