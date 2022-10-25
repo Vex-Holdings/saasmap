@@ -10,8 +10,9 @@ router.get('/admin', (req,res) => {
     res.render('users/admin')
 })
 
-router.get('/add-person', (req, res) => {
-    res.render('users/add-person')
+router.get('/add-person', async (req, res) => {
+    const users = await models.User.findAll()
+    res.render('users/add-person', {users: users})
 })
 
 router.get('/add-organization', (req, res) => {

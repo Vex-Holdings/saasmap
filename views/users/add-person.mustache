@@ -7,5 +7,50 @@
         <h1>SaaS Map Project - Add a Person</h1>
         <p>Put a form here to add a person to the DB.
         </p>
+        <form action="/users/add-person" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="firstname">First Name</label>
+                <input type="text" name="firstname" class="form-control" id="firstname" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="lastname">Last Name</label>
+                <input type="text" name="lastname" class="form-control" id="lastname" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="location">Location</label>
+                <input type="text" name="location" class="form-control" id="location" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="linkedin">LinkedIn</label>
+                <input type="text" name="linkedin" class="form-control" id="linkedin" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="twitter">Twitter</label>
+                <input type="text" name="twitter" class="form-control" id="twitter" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="email">e-mail</label>
+                <input type="email" name="email" class="form-control" id="email" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="source">Source</label>
+                <input type="text" name="source" class="form-control" id="source" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="user">User</label>
+                <select name="user" class="form-select" id="user">
+                    {{#users}}
+                    <option value={{user.id}}>{{user.username}}</option>
+                    {{/users}}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
     </div>
 {{> footer}}
+
+<!-- 
+<tr></tr>
+<th></th>
+<td></td>
+-->
