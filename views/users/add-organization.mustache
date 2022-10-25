@@ -1,11 +1,29 @@
 {{> header}}
-<title>SaaS Map Admin Page</title>
+<title>SaaS Map Add Organization</title>
 </head>
 <body>
     <div class="container">
     {{> usermenu}}
         <h1>SaaS Map Project - Add an Organization</h1>
-        <p>Put a form here to add Companies and VC Firms.
-        </p>
+        <p>Put a form here to add an Organization to the DB.</p>
+        <form action="/users/add-organization" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="orgname">Organization Name</label>
+                <input type="text" name="orgname" class="form-control" id="orgname" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <input type="text" name="description" class="form-control" id="description" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="location">Location</label>
+                <input type="text" name="location" class="form-control" id="location" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="website">Website</label>
+                <input type="text" name="website" class="form-control" id="website" />
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
     </div>
 {{> footer}}
