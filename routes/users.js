@@ -10,6 +10,13 @@ router.get('/admin', (req,res) => {
     res.render('users/admin')
 })
 
+router.get('/add-person', (req, res) => {
+    res.render('users/add-person')
+})
+
+router.get('/add-organization', (req, res) => {
+    res.render('users/add-organization')
+})
 
 // POST Pages
 
