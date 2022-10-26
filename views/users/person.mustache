@@ -50,7 +50,11 @@
                 {{/person}}
                 <button type="submit" class="btn btn-primary">Add Role</button>
             </div>
-            
         </form>
+        {{#message}}
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+        {{/message}}
     </div>
 {{> footer}}

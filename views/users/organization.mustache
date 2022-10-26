@@ -22,6 +22,19 @@
         <tr><td>Website:</td><td><a href="{{website}}" target="_blank">{{website}}</a></td></tr>
         </table>
         {{/organization}}
+        <h3>Sector Focus</h3>
+        {{#sector}}
+            <button class="btn btn-outline-secondary">{{sectorname}}</button>
+        {{/sector}}
+        <form action="/users/add-sector" method="POST">
+            <div class="input-group">
+                <input type="text" name="sectorname" class="form-control" placeholder="SaaS/Crypto/Venture Capital" />
+                {{#organization}}
+                <input type="hidden" name="orgid" class="form-control" value="{{id}}" />
+                {{/organization}}
+                <button type="submit" class="btn btn-primary">Add Sector</button>
+            </div>
+        </form>
         <hr>
         <h3>Management/Staff<h3>
         <hr>

@@ -9,17 +9,25 @@ const models = require('../models')
 router.get('/organization/:orgId', async (req,res) => {
     let orgid = req.params.orgId
     let organization = await models.Organization.findByPk(orgid)
-    res.render('users/organization', {organization: organization})
+    let sector = await models.Sector.findAll({
+        where: {
+            orgid: orgid
+        }
+    })
+    res.render('users/organization', {organization: organization, sector: sector})
 })
 
 router.get('/person/:peopleId', async (req,res) => {
     let personid = req.params.peopleId
     let person = await models.People.findByPk(personid)
+    let role = await sequelize.query('SELECT r.role, o.orgname, r.position FROM "Roles" r JOIN "Organizations" o ON r.orgid = o.id WHERE r.peopleid = ' + personid, {type: Sequelize.QueryTypes.SELECT})
+    /*
     let role = await models.Role.findAll({
         where: {
             peopleid: personid
         }
     })
+    */
     let org = await models.Organization.findAll({
         order:
             ['orgname']
@@ -49,6 +57,42 @@ router.get('/add-organization', (req, res) => {
 })
 
 // POST Pages
+
+router.post('/add-sector', async (req,res) => {
+    const sectorname = req.body.sectorname
+    const orgid = parseInt(req.body.orgid)
+
+    const newsector = await models.Sector.build({
+        sectorname: sectorname,
+        orgid: orgid
+    })
+    let savedSector = await newsector.save()
+    if(savedSector != null) {
+        res.redirect('/users/organization/' + orgid)
+    } else {
+        res.redirect('/users/organization/' + orgid, {message: 'Error adding sector'})
+    }
+})
+
+router.post('/add-role', async (req,res) => {
+    const role = req.body.role
+    const peopleid = parseInt(req.body.peopleid)
+    const orgid = req.body.orgid
+    const position = req.body.position
+
+    const newrole = await models.Role.build({
+        role: role,
+        peopleid: peopleid,
+        orgid: orgid,
+        position: position
+    })
+    let savedRole = await newrole.save()
+    if(savedRole != null) {
+        res.redirect('/users/person/' + peopleid)
+    } else {
+        res.redirect('/users/person/' + peopleid, {message: 'Error adding role'})
+    }
+})
 
 router.post('/add-organization', async (req,res) => {
     const orgname = req.body.orgname
