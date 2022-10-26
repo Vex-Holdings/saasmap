@@ -6,9 +6,36 @@ const models = require('../models')
 
 // GET Pages
 
+router.get('/organization/:orgId', async (req,res) => {
+    let orgid = req.params.orgId
+    let organization = await models.Organization.findByPk(orgid)
+    res.render('users/organization', {organization: organization})
+})
+
+router.get('/person/:peopleId', async (req,res) => {
+    let personid = req.params.peopleId
+    let person = await models.People.findByPk(personid)
+    let role = await models.Role.findAll({
+        where: {
+            peopleid: personid
+        }
+    })
+    let org = await models.Organization.findAll({
+        order:
+            ['orgname']
+    })
+    res.render('users/person', {person: person, role: role, org: org})
+})
+
 router.get('/admin', async (req,res) => {
-    const orgs = await models.Organization.findAll()
-    const people = await models.People.findAll()
+    const orgs = await models.Organization.findAll({
+        order:
+            ['orgname']
+    })
+    const people = await models.People.findAll({
+        order: 
+            ['lastname']
+    })
     res.render('users/admin', {orgs: orgs, people: people})
 })
 

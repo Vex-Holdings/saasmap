@@ -1,0 +1,32 @@
+{{> header}}
+<title>SaaS Map Company Page</title>
+</head>
+<body>
+    <div class="container">
+    {{> usermenu}}
+        {{#organization}}
+        <h1>SaaS Map Project - {{orgname}} Page</h1>
+        <p>Will put links to the various tables here.
+        </p>
+        <hr>
+        <h3>Details</h3>
+        <table>
+        <!-- 
+        <tr></tr>
+        <th></th>
+        <td></td>
+        -->
+        <tr><td>Organization:</td><td>{{orgname}}</td></tr>
+        <tr><td>Description:</td><td>{{description}}</td></tr>
+        <tr><td>Location:</td><td>{{location}}</td></tr>
+        <tr><td>Website:</td><td><a href="{{website}}" target="_blank">{{website}}</a></td></tr>
+        </table>
+        {{/organization}}
+        <hr>
+        <h3>Management/Staff<h3>
+        <hr>
+        <h3>Investors</h3>
+        <hr>
+        <h3>Board/Advisors</h3>
+    </div>
+{{> footer}}

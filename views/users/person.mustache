@@ -1,0 +1,56 @@
+{{> header}}
+<title>SaaS Map Person Page</title>
+</head>
+<body>
+    <div class="container">
+    {{> usermenu}}
+        {{#person}}
+        <h1>SaaS Map Project - {{firstname}} {{lastname}} Page</h1>
+        <p>Will put links to the various tables here.
+        </p>
+        <hr>
+        <h3>Details</h3>
+        <table>
+        <!-- 
+        <tr></tr>
+        <th></th>
+        <td></td>
+        -->
+        <tr><td>First Name:</td><td>{{firstname}}</td></tr>
+        <tr><td>Last Name:</td><td>{{lastname}}</td></tr>
+        <tr><td>Location:</td><td>{{location}}</td></tr>
+        <tr><td>Linked In:</td><td><a href="{{linkedin}}" target="_blank">{{linkedin}}</a></td></tr>
+        <tr><td>Twitter:</td><td><a href="{{twitter}}" target="_blank">{{twitter}}</a></td></tr>
+        <tr><td>Email:</td><td><a href="mailto:{{email}}">{{email}}</a></td></tr>
+        </table>
+        {{/person}}
+        <hr>
+        <h3>Associations</h3>
+        <table>
+        <tr><th>Role</th><th>Organization</th><th>Position</th></tr>
+        {{#role}}
+        <tr><td>{{role}}</td><td>{{orgname}}</td><td>{{position}}</td></tr>
+        {{/role}}
+        </table>
+        <form action="/users/add-role" method="POST">
+            <div class="input-group">
+                <select name="role" class="form-select" id="role">
+                    <option value="staff">Management/Staff</option>
+                    <option value="investor">Investor</option>
+                    <option value="advisor">Board Member/Advisor</option>
+                </select>
+                <select name="orgid" class="form-select" id="orgid">
+                    {{#org}}
+                    <option value={{id}}>{{orgname}}</option>
+                    {{/org}}
+                </select>
+                <input type="text" name="position" class="form-control" placeholder="Position/Title" />
+                {{#person}}
+                <input type="hidden" name="peopleid" class="form-control" value="{{id}}" />
+                {{/person}}
+                <button type="submit" class="btn btn-primary">Add Role</button>
+            </div>
+            
+        </form>
+    </div>
+{{> footer}}
