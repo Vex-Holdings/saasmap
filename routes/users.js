@@ -6,8 +6,10 @@ const models = require('../models')
 
 // GET Pages
 
-router.get('/admin', (req,res) => {
-    res.render('users/admin')
+router.get('/admin', async (req,res) => {
+    const orgs = await models.Organization.findAll()
+    const people = await models.People.findAll()
+    res.render('users/admin', {orgs: orgs, people: people})
 })
 
 router.get('/add-person', async (req, res) => {
@@ -51,7 +53,7 @@ router.post('/add-person', async (req,res) => {
     const source = req.body.source
     const userid = req.session.user.userId
 
-    const newperson = await models.Organization.build({
+    const newperson = await models.People.build({
         firstname: firstname,
         lastname: lastname,
         location: location,

@@ -7,5 +7,30 @@
         <h1>SaaS Map Project - Admin Page</h1>
         <p>Will put links to the various tables here.
         </p>
+        <h2>Organizations</h2>
+        <ul>
+        {{#orgs}}
+            <li>{{orgname}}
+                <ul>
+                    <li>{{description}}</li>
+                    <li>{{location}}</li>
+                    <li><a href="{{website}}" target="_blank">{{website}}</a></li>
+                </ul>
+            </li>
+        {{/orgs}}
+        </ul>
+        <h2>People</h2>
+        <ul>
+        {{#people}}
+            <li>{{firstname}} {{lastname}}
+                <ul>
+                    <li>{{location}}</li>
+                    <li>{{linkedin}}</li>
+                    <li>{{twitter}}</li>
+                    <li>{{email}}</li>
+                </ul>
+            </li>
+        {{/people}}
+        </ul>
     </div>
 {{> footer}}
