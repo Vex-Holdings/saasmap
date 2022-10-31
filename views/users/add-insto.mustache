@@ -1,0 +1,39 @@
+{{> header}}
+<title>SaaS Map Add Institutional Relationship</title>
+</head>
+<body>
+    <div class="container">
+    {{> usermenu}}
+        <h1>SaaS Map Project - Add Institutional Relationship</h1>
+        <p>Put a form here to add an Organization to the DB.</p>
+        <form action="/users/add-role" method="POST">
+            <div class="input-group">
+                <select name="investorid" class="form-select" id="investorid">
+                    {{#ventureorg}}
+                    <option value={{id}}>{{orgname}}</option>
+                    {{/ventureorg}}
+                </select>
+                <select name="investeeid" class="form-select" id="investeeid">
+                    {{#org}}
+                    <option value={{id}}>{{orgname}}</option>
+                    {{/org}}
+                </select>
+                <select name="roundtype" class="form-select" id="roundtype">
+                    <option value="seed">Seed Round</option>
+                    <option value="seriesa">Series A</option>
+                    <option value="seriesb">Series B</option>
+                    <option value="seriesc">Series C</option>
+                    <option value="seriesd">Series D+</option>
+                    <option value="private">Private Placement</option>
+                    <option value="debt">Debt Round</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Add Relationship</button>
+            </div>
+        </form>
+        {{#message}}
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+        {{/message}}
+    </div>
+{{> footer}}

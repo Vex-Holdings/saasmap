@@ -6,6 +6,12 @@ const models = require('../models')
 
 // GET Pages
 
+router.get('/add-insto', async (req,res) => {
+    let ventureorg = await sequelize.query('SELECT o.id o.orgname, s.sectorname FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Venture Capital\' ', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/add-insto', {ventureorg: ventureorg})
+})
+
 router.get('/organization/:orgId', async (req,res) => {
     let orgid = req.params.orgId
     let organization = await models.Organization.findByPk(orgid)
@@ -14,20 +20,16 @@ router.get('/organization/:orgId', async (req,res) => {
             orgid: orgid
         }
     })
-    res.render('users/organization', {organization: organization, sector: sector})
+    let staff = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'staff\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/organization', {organization: organization, sector: sector, staff: staff})
 })
 
 router.get('/person/:peopleId', async (req,res) => {
     let personid = req.params.peopleId
     let person = await models.People.findByPk(personid)
-    let role = await sequelize.query('SELECT r.role, o.orgname, r.position FROM "Roles" r JOIN "Organizations" o ON r.orgid = o.id WHERE r.peopleid = ' + personid, {type: Sequelize.QueryTypes.SELECT})
-    /*
-    let role = await models.Role.findAll({
-        where: {
-            peopleid: personid
-        }
-    })
-    */
+    let role = await sequelize.query('SELECT r.role, o.id, o.orgname, r.position FROM "Roles" r JOIN "Organizations" o ON r.orgid = o.id WHERE r.peopleid = ' + personid, {type: Sequelize.QueryTypes.SELECT})
+    
     let org = await models.Organization.findAll({
         order:
             ['orgname']

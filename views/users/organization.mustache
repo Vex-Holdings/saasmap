@@ -36,7 +36,12 @@
             </div>
         </form>
         <hr>
-        <h3>Management/Staff<h3>
+        <h3>Management/Staff</h3>
+        <table>
+        {{#staff}}
+        <tr><td>{{position}} - </td><td>{{firstname}} {{lastname}}</td><td><a href="/users/person/{{id}}">link</a></td></tr>
+        {{/staff}}
+        </table>
         <hr>
         <h3>Investors</h3>
         <hr>
