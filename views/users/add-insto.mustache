@@ -4,20 +4,23 @@
 <body>
     <div class="container">
     {{> usermenu}}
-        <h1>SaaS Map Project - Add Institutional Relationship</h1>
-        <p>Put a form here to add an Organization to the DB.</p>
-        <form action="/users/add-role" method="POST">
+        <h1>SaaS Map Project - Add Institutional Investment Relationship</h1>
+        <hr>
+        <form action="/users/add-insto" method="POST">
             <div class="input-group">
+                <span class="input-group-text" for="investorid">Investor</span>
                 <select name="investorid" class="form-select" id="investorid">
-                    {{#ventureorg}}
+                    {{#org}}
                     <option value={{id}}>{{orgname}}</option>
-                    {{/ventureorg}}
+                    {{/org}}
                 </select>
+                <span class="input-group-text" for="investeeid">Investment</span>
                 <select name="investeeid" class="form-select" id="investeeid">
                     {{#org}}
                     <option value={{id}}>{{orgname}}</option>
                     {{/org}}
                 </select>
+                <span class="input-group-text" for="roundtype">Round Type</span>
                 <select name="roundtype" class="form-select" id="roundtype">
                     <option value="seed">Seed Round</option>
                     <option value="seriesa">Series A</option>
@@ -26,6 +29,7 @@
                     <option value="seriesd">Series D+</option>
                     <option value="private">Private Placement</option>
                     <option value="debt">Debt Round</option>
+                    <option value="acquire">Acquisition</option>
                 </select>
                 <button type="submit" class="btn btn-primary">Add Relationship</button>
             </div>

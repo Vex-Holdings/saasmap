@@ -7,9 +7,11 @@ const models = require('../models')
 // GET Pages
 
 router.get('/add-insto', async (req,res) => {
-    let ventureorg = await sequelize.query('SELECT o.id o.orgname, s.sectorname FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Venture Capital\' ', {type: Sequelize.QueryTypes.SELECT})
-
-    res.render('users/add-insto', {ventureorg: ventureorg})
+    let org = await models.Organization.findAll({
+        order:
+            ['orgname']
+    })
+    res.render('users/add-insto', {org: org})
 })
 
 router.get('/organization/:orgId', async (req,res) => {
@@ -21,8 +23,10 @@ router.get('/organization/:orgId', async (req,res) => {
         }
     })
     let staff = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'staff\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-
-    res.render('users/organization', {organization: organization, sector: sector, staff: staff})
+    let investor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'investor\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
+    let vc = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investorid = o.id WHERE i.investeeid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
+    let investment = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investeeid = o.id WHERE i.investorid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
+    res.render('users/organization', {organization: organization, sector: sector, staff: staff, investor: investor, vc: vc, investment: investment})
 })
 
 router.get('/person/:peopleId', async (req,res) => {
@@ -60,6 +64,24 @@ router.get('/add-organization', (req, res) => {
 
 // POST Pages
 
+router.post('/add-insto', async (req,res) => {
+    const investor = parseInt(req.body.investorid)
+    const investee = parseInt(req.body.investeeid)
+    const roundtype = req.body.roundtype
+
+    const newinsto = await models.Insto.build({
+        investorid: investor,
+        investeeid: investee,
+        roundtype: roundtype
+    })
+    let savedInsto = await newinsto.save()
+    if(savedInsto != null) {
+        res.redirect('/users/organization/' + investor)
+    } else {
+        res.render('users/add-insto', {message: 'Error adding institutional investor relationship'})
+    }
+})
+
 router.post('/add-sector', async (req,res) => {
     const sectorname = req.body.sectorname
     const orgid = parseInt(req.body.orgid)
@@ -72,7 +94,7 @@ router.post('/add-sector', async (req,res) => {
     if(savedSector != null) {
         res.redirect('/users/organization/' + orgid)
     } else {
-        res.redirect('/users/organization/' + orgid, {message: 'Error adding sector'})
+        res.render('users/add-sector', {message: 'Error adding sector'})
     }
 })
 
@@ -92,7 +114,7 @@ router.post('/add-role', async (req,res) => {
     if(savedRole != null) {
         res.redirect('/users/person/' + peopleid)
     } else {
-        res.redirect('/users/person/' + peopleid, {message: 'Error adding role'})
+        res.render('/users/add-role', {message: 'Error adding role'})
     }
 })
 

@@ -44,6 +44,17 @@
         </table>
         <hr>
         <h3>Investors</h3>
+        {{#investor}}
+        <tr><td>{{position}} - </td><td>{{firstname}} {{lastname}}</td><td><a href="/users/person/{{id}}">link</a></td></tr>
+        {{/investor}}
+        {{#vc}}
+        <tr><td>{{orgname}}</td><td>{{roundtype}}</td><td><a href="/users/organization/{{id}}">link</a></td></tr>
+        {{/vc}}
+        <hr>
+        <h3>Investments</h3>
+        {{#investment}}
+        <tr><td>{{orgname}}</td><td>{{roundtype}}</td><td><a href="/users/organization/{{id}}">link</a></td></tr>
+        {{/investment}}
         <hr>
         <h3>Board/Advisors</h3>
     </div>
