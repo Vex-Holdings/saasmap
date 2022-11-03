@@ -39,23 +39,27 @@
         <h3>Management/Staff</h3>
         <table>
         {{#staff}}
-        <tr><td>{{position}} - </td><td>{{firstname}} {{lastname}}</td><td><a href="/users/person/{{id}}">link</a></td></tr>
+        <tr><td>{{position}} - </td><td><a href="/users/person/{{id}}">{{firstname}} {{lastname}}</a></td></tr>
         {{/staff}}
         </table>
         <hr>
         <h3>Investors</h3>
         {{#investor}}
-        <tr><td>{{position}} - </td><td>{{firstname}} {{lastname}}</td><td><a href="/users/person/{{id}}">link</a></td></tr>
+        <tr><td>{{position}} - </td><td><a href="/users/person/{{id}}">{{firstname}} {{lastname}}</a></td></tr>
         {{/investor}}
+        <br>
         {{#vc}}
-        <tr><td>{{orgname}}</td><td>{{roundtype}}</td><td><a href="/users/organization/{{id}}">link</a></td></tr>
+        <tr><td><a href="/users/organization/{{id}}">{{orgname}}: </a></td><td>{{roundtype}}</td></tr>
         {{/vc}}
         <hr>
         <h3>Investments</h3>
         {{#investment}}
-        <tr><td>{{orgname}}</td><td>{{roundtype}}</td><td><a href="/users/organization/{{id}}">link</a></td></tr>
+        <tr><td><a href="/users/organization/{{id}}">{{orgname}}: </a></td><td>{{roundtype}}</td></tr>
         {{/investment}}
         <hr>
         <h3>Board/Advisors</h3>
+        {{#advisor}}
+        <tr><td>{{position}} - </td><td><a href="/users/person/{{id}}">{{firstname}} {{lastname}}</a></td></tr>
+        {{/advisor}}
     </div>
 {{> footer}}

@@ -29,7 +29,7 @@
         <table>
         <tr><th>Role</th><th>Organization</th><th>Position</th></tr>
         {{#role}}
-        <tr><td>{{role}}</td><td>{{orgname}}</td><td>{{position}}</td><td><a href="/users/organization/{{id}}">link</a></td></tr>
+        <tr><td>{{role}}</td><td><a href="/users/organization/{{id}}">{{orgname}}</a></td><td>{{position}}</td></tr>
         {{/role}}
         </table>
         <form action="/users/add-role" method="POST">

@@ -26,7 +26,8 @@ router.get('/organization/:orgId', async (req,res) => {
     let investor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'investor\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
     let vc = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investorid = o.id WHERE i.investeeid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
     let investment = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investeeid = o.id WHERE i.investorid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-    res.render('users/organization', {organization: organization, sector: sector, staff: staff, investor: investor, vc: vc, investment: investment})
+    let advisor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'advisor\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
+    res.render('users/organization', {organization: organization, sector: sector, staff: staff, investor: investor, vc: vc, investment: investment, advisor: advisor})
 })
 
 router.get('/person/:peopleId', async (req,res) => {
