@@ -51,6 +51,16 @@
         </form>
         <hr>
         <h3>Comments</h3>
+        <form action="/users/add-comment" method="POST">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" placeholder="add a title" id="title" />
+            <label for="body" class="form-label">Comments</label>
+            <input type="text" class="form-control" placeholder="add comments here" id="body" />
+            {{#person}}
+                <input type="hidden" name="peopleid" class="form-control" value="{{id}}" />
+            {{/person}}
+            <button type="submit" class="btn btn-primary">Add Note</button>
+        </form>
         {{#comment}}
         <table>
         <!-- 
