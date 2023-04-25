@@ -39,7 +39,14 @@ router.get('/person/:peopleId', async (req,res) => {
         order:
             ['orgname']
     })
-    res.render('users/person', {person: person, role: role, org: org})
+
+    let comment = await models.Comment.findAll({
+        where: {
+            peopleid: personid
+        }
+    })
+
+    res.render('users/person', {person: person, role: role, org: org, comment: comment})
 })
 
 router.get('/admin', async (req,res) => {
@@ -64,6 +71,26 @@ router.get('/add-organization', (req, res) => {
 })
 
 // POST Pages
+
+router.post('/add-peepcomment', async (req,res) => {
+    const title = req.body.title
+    const body = req.body.body
+    const peopleid = parseInt(req.body.peopleid)
+    // const orgid = parseInt(req.body.orgid)
+    const userid = req.session.user.userId
+
+    const newcomment = await models.Comment.build({
+        title: title,
+        body: body,
+        userid: userid,
+        peopleid: peopleid,
+        // orgid: orgid
+    })
+    let savedComment = await newcomment.save()
+    if (savedComment != null) {
+        res.redirect('/users/person/' + peopleid)
+    }
+})
 
 router.post('/add-insto', async (req,res) => {
     const investor = parseInt(req.body.investorid)
@@ -102,7 +129,7 @@ router.post('/add-sector', async (req,res) => {
 router.post('/add-role', async (req,res) => {
     const role = req.body.role
     const peopleid = parseInt(req.body.peopleid)
-    const orgid = req.body.orgid
+    const orgid = parseInt(req.body.orgid)
     const position = req.body.position
 
     const newrole = await models.Role.build({
