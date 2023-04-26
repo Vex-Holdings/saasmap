@@ -63,15 +63,13 @@
         </form>
         {{#comment}}
         <hr>
-        <table>
-        <!-- 
-        <tr></tr>
-        <th></th>
-        <td></td>
-        -->
-        <tr><td>Title</td><td>{{title}}</td></tr>
-        <tr><td>Details</td><td>{{body}}</td></tr>
-        </table>
+        <h4>{{title}}</h4>
+        <p>{{body}}</p>
+        <form action="/users/delete-peepcomment" method="POST">
+            <input type="hidden" name="commentid" value="{{id}}" />
+            <input type="hidden" name="peopleid" value="{{peopleid}}" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
         {{/comment}}
         <hr>
         {{#message}}

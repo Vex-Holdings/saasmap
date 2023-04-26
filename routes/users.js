@@ -72,6 +72,17 @@ router.get('/add-organization', (req, res) => {
 
 // POST Pages
 
+router.post('/delete-peepcomment',async (req,res) => {
+    let commentid = parseInt(req.body.commentid)
+    let peopleid = parseInt(req.body.peopleid)
+    let result = await models.Comment.destroy({
+        where: {
+            id: commentid
+        }
+    })
+    res.redirect('/users/person/' + peopleid)
+})
+
 router.post('/add-peepcomment', async (req,res) => {
     const title = req.body.title
     const body = req.body.body
