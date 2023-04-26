@@ -27,7 +27,13 @@ router.get('/organization/:orgId', async (req,res) => {
     let vc = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investorid = o.id WHERE i.investeeid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
     let investment = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investeeid = o.id WHERE i.investorid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
     let advisor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'advisor\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-    res.render('users/organization', {organization: organization, sector: sector, staff: staff, investor: investor, vc: vc, investment: investment, advisor: advisor})
+    let comment = await models.Comment.findAll({
+        where: {
+            orgid: orgid
+        }
+    })
+
+    res.render('users/organization', {organization: organization, sector: sector, staff: staff, investor: investor, vc: vc, investment: investment, advisor: advisor, comment: comment})
 })
 
 router.get('/person/:peopleId', async (req,res) => {
@@ -71,6 +77,37 @@ router.get('/add-organization', (req, res) => {
 })
 
 // POST Pages
+
+router.post('/delete-orgcomment',async (req,res) => {
+    let commentid = parseInt(req.body.commentid)
+    let orgid = parseInt(req.body.orgid)
+    let result = await models.Comment.destroy({
+        where: {
+            id: commentid
+        }
+    })
+    res.redirect('/users/organization/' + orgid)
+})
+
+router.post('/add-orgcomment', async (req,res) => {
+    const title = req.body.title
+    const body = req.body.body
+    // const peopleid = parseInt(req.body.peopleid)
+    const orgid = parseInt(req.body.orgid)
+    const userid = req.session.user.userId
+
+    const newcomment = await models.Comment.build({
+        title: title,
+        body: body,
+        userid: userid,
+        // peopleid: peopleid,
+        orgid: orgid
+    })
+    let savedComment = await newcomment.save()
+    if (savedComment != null) {
+        res.redirect('/users/organization/' + orgid)
+    }
+})
 
 router.post('/delete-peepcomment',async (req,res) => {
     let commentid = parseInt(req.body.commentid)
