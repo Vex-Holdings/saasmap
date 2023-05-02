@@ -7,9 +7,33 @@ const models = require('../models')
 // GET Pages
 
 router.get('/a16z', async (req,res) => {
-    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'a16z SaaS\'', {type: Sequelize.QueryTypes.SELECT})
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'a16z SaaS\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
     res.render('users/a16z', {companies: companies})
+})
+
+router.get('/greylock', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Greylock SaaS\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/greylock', {companies: companies})
+})
+
+router.get('/dfj', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'DFJ SaaS\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/dfj', {companies: companies})
+})
+
+router.get('/sequoia', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Sequoia SaaS\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/sequoia', {companies: companies})
+})
+
+router.get('/bayarea', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Bay Area Series A\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/bayarea', {companies: companies})
 })
 
 router.get('/add-insto', async (req,res) => {
