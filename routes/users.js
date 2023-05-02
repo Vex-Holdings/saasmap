@@ -6,6 +6,12 @@ const models = require('../models')
 
 // GET Pages
 
+router.get('/a16z', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'a16z SaaS\'', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/a16z', {companies: companies})
+})
+
 router.get('/add-insto', async (req,res) => {
     let org = await models.Organization.findAll({
         order:
