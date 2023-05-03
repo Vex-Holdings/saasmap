@@ -41,7 +41,8 @@ router.get('/add-insto', async (req,res) => {
         order:
             ['orgname']
     })
-    res.render('users/add-insto', {org: org})
+    let vc = await sequelize.query('SELECT o.id, o.orgname FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Venture Capital\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+    res.render('users/add-insto', {org: org, vc: vc})
 })
 
 router.get('/organization/:orgId', async (req,res) => {
