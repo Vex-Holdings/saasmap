@@ -36,6 +36,12 @@ router.get('/bayarea', async (req,res) => {
     res.render('users/bayarea', {companies: companies})
 })
 
+router.get('/vc', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Venture Capital\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/vc', {companies: companies})
+})
+
 router.get('/add-insto', async (req,res) => {
     let org = await models.Organization.findAll({
         order:
