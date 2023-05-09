@@ -236,12 +236,14 @@ router.post('/add-organization', async (req,res) => {
     const description = req.body.description
     const location = req.body.location
     const website = req.body.website
+    const link = req.body.link
 
     const neworg = await models.Organization.build({
         orgname: orgname,
         description: description,
         location: location,
-        website: website
+        website: website,
+        link: link
     })
     let savedOrg = await neworg.save()
     if(savedOrg != null) {
