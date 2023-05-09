@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     orgname: DataTypes.STRING,
     description: DataTypes.STRING,
     location: DataTypes.STRING,
-    website: DataTypes.STRING
+    website: DataTypes.STRING,
+    cblink: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Organization',

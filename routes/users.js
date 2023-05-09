@@ -53,7 +53,11 @@ router.get('/add-insto', async (req,res) => {
 
 router.get('/organization/:orgId', async (req,res) => {
     let orgid = req.params.orgId
-    let organization = await models.Organization.findByPk(orgid)
+    let organization = await models.Organization.findAll({
+        where: {
+            id: orgid
+        }
+    })
     let sector = await models.Sector.findAll({
         where: {
             orgid: orgid
@@ -236,14 +240,14 @@ router.post('/add-organization', async (req,res) => {
     const description = req.body.description
     const location = req.body.location
     const website = req.body.website
-    const link = req.body.link
+    const cblink = req.body.cblink
 
     const neworg = await models.Organization.build({
         orgname: orgname,
         description: description,
         location: location,
         website: website,
-        link: link
+        cblink: cblink
     })
     let savedOrg = await neworg.save()
     if(savedOrg != null) {
