@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     twitter: DataTypes.STRING,
     email: DataTypes.STRING,
     source: DataTypes.STRING,
-    userid: DataTypes.INTEGER
+    userid: DataTypes.INTEGER,
+    cblink: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'People',

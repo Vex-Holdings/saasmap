@@ -3,16 +3,16 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addColumn(
-      'Organizations',
-      'link',
-      Sequelize.TEXT
+      'People',
+      'cblink',
+      Sequelize.STRING
     );
   },
 
   async down (queryInterface, Sequelize) {
     await queryInterface.removeColumn(
-      'Organizations',
-      'link'
+      'People',
+      'cblink'
     );
   }
 };

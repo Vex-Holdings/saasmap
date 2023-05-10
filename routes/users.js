@@ -265,6 +265,7 @@ router.post('/add-person', async (req,res) => {
     const twitter = req.body.twitter
     const email = req.body.email
     const source = req.body.source
+    const cblink = req.body.cblink
     const userid = req.session.user.userId
 
     const newperson = await models.People.build({
@@ -275,6 +276,7 @@ router.post('/add-person', async (req,res) => {
         twitter: twitter,
         email: email,
         source: source,
+        cblink: cblink,
         userid: userid
     })
     let savedPerson = await newperson.save()
