@@ -36,6 +36,12 @@ router.get('/turtle', async (req,res) => {
     res.render('users/turtle', {companies: companies})
 })
 
+router.get('/forge', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Forge\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/forge', {companies: companies})
+})
+
 router.get('/bayarea', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Bay Area Series A\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
