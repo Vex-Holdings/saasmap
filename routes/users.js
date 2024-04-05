@@ -54,6 +54,12 @@ router.get('/vc', async (req,res) => {
     res.render('users/vc', {companies: companies})
 })
 
+router.get('/btc', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Bitcoin\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/btc', {companies: companies})
+})
+
 router.get('/add-insto', async (req,res) => {
     let org = await models.Organization.findAll({
         order:
