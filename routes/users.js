@@ -54,6 +54,18 @@ router.get('/vc', async (req,res) => {
     res.render('users/vc', {companies: companies})
 })
 
+router.get('/bavcpe', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Venture Capital\' AND o.location LIKE \'%, CA\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/bavcpe', {companies: companies})
+})
+
+router.get('/sfvcpe', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Venture Capital\' AND o.location = \'San Francisco, CA\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/sfvcpe', {companies: companies})
+})
+
 router.get('/btc', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Bitcoin\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
