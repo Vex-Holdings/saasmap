@@ -6,9 +6,9 @@
     {{> usermenu}}
         <h1>SaaS Map Project - California VC and PE Firms Page</h1>
         <table>
-            <tr><th>Company</th><th>Location</th></tr>
+            <tr><th>Company</th><th>Description</th></tr>
             {{#companies}}
-            <tr><td><a href="/users/organization/{{id}}">{{orgname}}</a></td><td>{{location}}</td></tr>
+            <tr><td><a href="/users/organization/{{id}}">{{orgname}}</a></td><td>{{description}}</td></tr>
             {{/companies}}
         </table>
     </div>
