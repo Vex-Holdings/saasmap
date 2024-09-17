@@ -19,18 +19,18 @@
         <a href="/users/turtle/"><button class="btn btn-outline-secondary">Turtle</button></a>
         <a href="/users/forge/"><button class="btn btn-outline-secondary">Forge</button></a>
         <a href="/users/btc/"><button class="btn btn-outline-secondary">BTC</button></a>
-        <div class="row">
-            <div class="col-6">
+        <div class="row gx-8">
+            <div class="col-3">
                 <h2>Organizations</h2>
-                <ul>
+                <ul style="height:200px;border:1px solid black;overflow-y:scroll;">
                 {{#orgs}}
                     <li><a href="/users/organization/{{id}}">{{orgname}}</a></li>
                 {{/orgs}}
                 </ul>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <h2>People</h2>
-                <ul>
+                <ul style="height:200px;border:1px solid black;overflow-y:scroll;">
                 {{#people}}
                     <li><a href="/users/person/{{id}}">{{firstname}} {{lastname}}</a></li>
                 {{/people}}
