@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "jioudyfi",
-    "password": "MOM5W92G_k_cZOeQOftCzV94-RKY-ekA",
-    "database": "jioudyfi",
-    "host": "heffalump.db.elephantsql.com",
+    "username": "postgres",
+    "password": "jgc9123",
+    "database": "saasmap",
+    "host": "127.0.0.1",
+    "port": 5434,
     "dialect": "postgres"
   },
   "test": {
