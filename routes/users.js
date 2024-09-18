@@ -6,6 +6,12 @@ const models = require('../models')
 
 // GET Pages
 
+router.get('/ai', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'AI\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/ai', {companies: companies})
+})
+
 router.get('/a16z', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'a16z SaaS\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
@@ -66,10 +72,10 @@ router.get('/sfvcpe', async (req,res) => {
     res.render('users/sfvcpe', {companies: companies})
 })
 
-router.get('/btc', async (req,res) => {
+router.get('/bitcoin', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Bitcoin\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
-    res.render('users/btc', {companies: companies})
+    res.render('users/bitcoin', {companies: companies})
 })
 
 router.get('/add-insto', async (req,res) => {
