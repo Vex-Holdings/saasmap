@@ -216,6 +216,12 @@ router.get('/socialmedia', async (req,res) => {
     res.render('users/socialmedia', {companies: companies})
 })
 
+router.get('/vex', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Vex\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/vex', {companies: companies})
+})
+
 router.get('/voip', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'VOIP\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
