@@ -1,0 +1,15 @@
+{{> header}}
+<title>Sector - Secure File Management</title>
+</head>
+<body>
+    <div class="container">
+    {{> usermenu}}
+        <h1>Sector - Secure File Management Page</h1>
+        <table>
+            <tr><th>Company</th><th>Description</th><th>Location</th></tr>
+            {{#companies}}
+            <tr><td><a href="/users/organization/{{id}}">{{orgname}}</a></td><td>{{description}}</td><td>{{location}}</td></tr>
+            {{/companies}}
+        </table>
+    </div>
+{{> footer}}
