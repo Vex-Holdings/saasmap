@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     location: DataTypes.STRING,
     website: DataTypes.STRING,
-    cblink: DataTypes.STRING
+    cblink: DataTypes.STRING,
+    twitter: DataTypes.STRING,
+    linkedin: DataTypes.STRING,
+    founded: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Organization',
