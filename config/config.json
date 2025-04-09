@@ -14,5 +14,13 @@
     "host": "autorack.proxy.rlwy.net",
     "port": 30987,
     "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "BZoyQJDBTMyothukuJoydBfxtYyfAjEp",
+    "database": "railway",
+    "host": "autorack.proxy.rlwy.net",
+    "port": 30987,
+    "dialect": "postgres"
   }
 }
