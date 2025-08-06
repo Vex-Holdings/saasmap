@@ -12,6 +12,12 @@ router.get('/ai', async (req,res) => {
     res.render('users/ai', {companies: companies})
 })
 
+router.get('/acquired', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Acquired\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/acquired', {companies: companies})
+})
+
 router.get('/analytics', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Analytics\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
