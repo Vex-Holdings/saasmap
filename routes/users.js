@@ -492,6 +492,8 @@ router.post('/add-organization', async (req,res) => {
     const description = req.body.description
     const location = req.body.location
     const website = req.body.website
+    const twitter = req.body.xlink
+    const linkedin = req.body.linkedinlink
     const cblink = req.body.cblink
 
     const neworg = await models.Organization.build({
@@ -499,6 +501,8 @@ router.post('/add-organization', async (req,res) => {
         description: description,
         location: location,
         website: website,
+        twitter: twitter,
+        linkedin: linkedin,
         cblink: cblink
     })
     let savedOrg = await neworg.save()
