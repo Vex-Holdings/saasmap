@@ -114,6 +114,12 @@ router.get('/foodtech', async (req,res) => {
     res.render('users/foodtech', {companies: companies})
 })
 
+router.get('/healthcare', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Health Care\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/healthcare', {companies: companies})
+})
+
 router.get('/logistics', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Logistics\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
