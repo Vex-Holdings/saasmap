@@ -4,7 +4,7 @@
 
 - **Framework**: Express 4 with Mustache templates
 - **Database**: PostgreSQL via `pg` (raw queries, no ORM)
-- **Auth**: Session-based (`express-session`)
+- **Auth**: Session-based (`express-session` + `connect-pg-simple` for Postgres-backed session store)
 - **Templates**: `.mustache` files in `views/`, partials in `views/partials/`
 - **Entry point**: `app.js`
 - **Routes**: `routes/index.js` (public), `routes/users.js` (auth-protected, ~50 handlers)
@@ -14,6 +14,18 @@
 - **Deployment**: Railway (project: `triumphant-love`, service: `saasmap`). Postgres plugin provides `DATABASE_URL`. `SESSION_SECRET` set as a service variable.
 
 ## Change Log
+
+### 2026-02-12 — Add Postgres session store
+**Commit**: `bfe0ef5`
+
+**Problem**: `express-session` used the default `MemoryStore`, which doesn't persist across restarts and logs a production warning on Railway.
+
+**Solution**:
+- Installed `connect-pg-simple` — stores sessions in Postgres
+- Added `pgSession` store to session config in `app.js` using `DATABASE_URL`
+- `createTableIfMissing: true` auto-creates the `session` table on first run
+
+**Files changed**: `app.js`, `package.json`, `package-lock.json`
 
 ### 2026-02-12 — Fix Railway deployment
 **Problem**: App crashed on Railway due to missing `start` script and missing environment variables (`DATABASE_URL`, `SESSION_SECRET`). Sequelize threw `ERR_INVALID_ARG_TYPE` because `DATABASE_URL` was undefined.
