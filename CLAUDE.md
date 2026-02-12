@@ -11,10 +11,20 @@
 - **Middleware**: `middlewares/authorization.js`, `middlewares/getallusers.js`
 - **Static assets**: `css/` served at `/css`
 - **Environment**: `.env` file loaded via `dotenv`; secrets (`SESSION_SECRET`, DB credentials) are in env vars
+- **Deployment**: Railway (project: `triumphant-love`, service: `saasmap`). Postgres plugin provides `DATABASE_URL`. `SESSION_SECRET` set as a service variable.
 
 ## Change Log
 
-### 2026-02-12 — Add start script for Railway deployment
+### 2026-02-12 — Fix Railway deployment
+**Problem**: App crashed on Railway due to missing `start` script and missing environment variables (`DATABASE_URL`, `SESSION_SECRET`). Sequelize threw `ERR_INVALID_ARG_TYPE` because `DATABASE_URL` was undefined.
+
+**Solution**:
+- Added `"start": "node app.js"` to `package.json` scripts (commit `ec18ec6`)
+- Added Postgres plugin to Railway project
+- Set `DATABASE_URL` on saasmap service (referencing `${{Postgres.DATABASE_URL}}`)
+- Set `SESSION_SECRET` on saasmap service
+
+### 2026-02-12 — Add helmet, rate limiting, and configurable port
 **Commit**: `ec18ec6`
 
 **Problem**: Railway runs `npm start` by default, but `package.json` had no `start` script, causing deploys to crash immediately.
