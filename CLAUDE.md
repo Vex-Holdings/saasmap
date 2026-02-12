@@ -10,10 +10,23 @@
 - **Routes**: `routes/index.js` (public), `routes/users.js` (auth-protected, ~50 handlers)
 - **Middleware**: `middlewares/authorization.js`, `middlewares/getallusers.js`
 - **Static assets**: `css/` served at `/css`
-- **Environment**: `.env` file loaded via `dotenv`; secrets (`SESSION_SECRET`, DB credentials) are in env vars
+- **Environment**: `.env` file loaded via `dotenv` (development only); secrets (`SESSION_SECRET`, DB credentials) are in env vars
 - **Deployment**: Railway (project: `triumphant-love`, service: `saasmap`). Postgres plugin provides `DATABASE_URL`. `SESSION_SECRET` set as a service variable.
 
 ## Change Log
+
+### 2026-02-12 — Clean up Railway deploy warnings
+
+**Problem**: Two noisy warnings in Railway deploy logs:
+1. `npm warn config production Use --omit=dev instead.` — npm deprecation triggered by `NODE_ENV=production` during build
+2. `[dotenv@17.3.1] injecting env (0) from .env` — dotenv logs even when no `.env` file exists
+
+**Solution**:
+- Added `Procfile` (`web: node app.js`) so Railway runs node directly instead of `npm start`
+- Added `nixpacks.toml` to override install command with `npm ci --omit=dev --loglevel=error`, suppressing the deprecation warning from the Nixpacks build
+- Wrapped `dotenv` require in `app.js` with `NODE_ENV !== 'production'` guard — skips dotenv on Railway, loads `.env` locally as before
+
+**Files changed**: `app.js`, `Procfile` (new), `nixpacks.toml` (new)
 
 ### 2026-02-12 — Add Postgres session store
 **Commit**: `bfe0ef5`
