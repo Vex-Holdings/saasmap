@@ -14,6 +14,16 @@
 
 ## Change Log
 
+### 2026-02-12 — Add start script for Railway deployment
+**Commit**: `ec18ec6`
+
+**Problem**: Railway runs `npm start` by default, but `package.json` had no `start` script, causing deploys to crash immediately.
+
+**Solution**:
+- Added `"start": "node app.js"` to `package.json` scripts
+
+**Files changed**: `package.json`
+
 ### 2026-02-12 — Add helmet, rate limiting, and configurable port
 **Commit**: `1e2426e`
 
