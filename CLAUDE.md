@@ -14,6 +14,18 @@
 
 ## Change Log
 
+### 2026-02-12 — Add helmet, rate limiting, and configurable port
+**Commit**: `1e2426e`
+
+**Solution**:
+- Installed `helmet` — adds security headers (X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security, CSP, etc.)
+- Added `app.use(helmet())` in `app.js` early in the middleware chain, after favicon
+- Installed `express-rate-limit` — protects auth endpoints against brute-force attacks
+- Created `authLimiter` (20 requests per 15-minute window) applied to `POST /login` and `POST /register` in `routes/index.js`
+- Changed hardcoded `PORT = 3000` to `process.env.PORT || 3000` in `app.js`
+
+**Files changed**: `app.js`, `routes/index.js`, `package.json`, `package-lock.json`
+
 ### 2026-02-12 — Global error handling
 **Commit**: `4353a66` — "add global error handling for async route handlers"
 
