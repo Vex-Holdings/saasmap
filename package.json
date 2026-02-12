@@ -4,6 +4,7 @@
   "description": "Creating a map for SaaS companies, their staff, investors and if possible, their advisors to sort out the connections.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
