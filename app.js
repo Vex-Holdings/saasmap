@@ -7,6 +7,7 @@ const app = express();
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 const path = require('path');
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use(helmet());
@@ -22,6 +23,10 @@ app.set('views',VIEWS_PATH);
 app.set('view engine','mustache');
 app.use('/css',express.static('css'));
 app.use(session({
+    store: new pgSession({
+        conString: process.env.DATABASE_URL,
+        createTableIfMissing: true
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
