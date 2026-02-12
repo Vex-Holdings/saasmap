@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 require('express-async-errors');
+const helmet = require('helmet');
 const favicon = require('serve-favicon');
 const app = express();
 const mustacheExpress = require('mustache-express');
@@ -8,11 +9,12 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
+app.use(helmet());
 const checkAuthorization = require('./middlewares/authorization');
 const getAllUsers = require('./middlewares/getallusers')
 const userRoutes = require('./routes/users');
 const indexRoutes = require('./routes/index');
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const VIEWS_PATH = path.join(__dirname,'/views');
 
 app.engine('mustache',mustacheExpress(VIEWS_PATH + '/partials','.mustache'));

@@ -1,9 +1,16 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
 const models = require('../models');
 
 const SALT_ROUNDS = 10;
+
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 20, // 20 attempts per window
+    message: 'Too many attempts, please try again later'
+});
 
 // GET pages 
 router.get('/',(req,res) => {
@@ -32,7 +39,7 @@ router.get('/logout',(req,res,next) => {
 })
 
 // POST pages
-router.post('/login', async (req,res) => {
+router.post('/login', authLimiter, async (req,res) => {
     let username = req.body.username
     let password = req.body.password
 
@@ -58,7 +65,7 @@ router.post('/login', async (req,res) => {
     }
 })
 
-router.post('/register', async (req,res) => {
+router.post('/register', authLimiter, async (req,res) => {
     let username = req.body.username
     let password = req.body.password
     let status = req.body.status
