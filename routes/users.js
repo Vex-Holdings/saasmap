@@ -333,11 +333,11 @@ router.get('/organization/:orgId', async (req,res) => {
             orgid: orgid
         }
     })
-    let staff = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'staff\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-    let investor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'investor\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-    let vc = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investorid = o.id WHERE i.investeeid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-    let investment = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investeeid = o.id WHERE i.investorid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
-    let advisor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'advisor\' AND r.orgid = ' + orgid, {type: Sequelize.QueryTypes.SELECT})
+    let staff = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'staff\' AND r.orgid = $orgid', {bind: {orgid}, type: Sequelize.QueryTypes.SELECT})
+    let investor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'investor\' AND r.orgid = $orgid', {bind: {orgid}, type: Sequelize.QueryTypes.SELECT})
+    let vc = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investorid = o.id WHERE i.investeeid = $orgid', {bind: {orgid}, type: Sequelize.QueryTypes.SELECT})
+    let investment = await sequelize.query('SELECT o.id, o.orgname, i.roundtype FROM "Instos" i JOIN "Organizations" o ON i.investeeid = o.id WHERE i.investorid = $orgid', {bind: {orgid}, type: Sequelize.QueryTypes.SELECT})
+    let advisor = await sequelize.query('SELECT r.position, p.id, p.firstname, p.lastname FROM "Roles" r JOIN "People" p ON r.peopleid = p.id WHERE r.role = \'advisor\' AND r.orgid = $orgid', {bind: {orgid}, type: Sequelize.QueryTypes.SELECT})
     let comment = await models.Comment.findAll({
         where: {
             orgid: orgid
@@ -350,7 +350,7 @@ router.get('/organization/:orgId', async (req,res) => {
 router.get('/person/:peopleId', async (req,res) => {
     let personid = req.params.peopleId
     let person = await models.People.findByPk(personid)
-    let role = await sequelize.query('SELECT r.role, o.id, o.orgname, r.position FROM "Roles" r JOIN "Organizations" o ON r.orgid = o.id WHERE r.peopleid = ' + personid, {type: Sequelize.QueryTypes.SELECT})
+    let role = await sequelize.query('SELECT r.role, o.id, o.orgname, r.position FROM "Roles" r JOIN "Organizations" o ON r.orgid = o.id WHERE r.peopleid = $personid', {bind: {personid}, type: Sequelize.QueryTypes.SELECT})
     
     let org = await models.Organization.findAll({
         order:
