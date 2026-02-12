@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const favicon = require('serve-favicon');
 const app = express();
@@ -18,7 +19,7 @@ app.set('views',VIEWS_PATH);
 app.set('view engine','mustache');
 app.use('/css',express.static('css'));
 app.use(session({
-    secret: 'secretsquirrel',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
