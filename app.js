@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+require('express-async-errors');
 const favicon = require('serve-favicon');
 const app = express();
 const mustacheExpress = require('mustache-express');
@@ -39,6 +40,11 @@ app.use((req,res,next) => {
 app.use('/',indexRoutes);
 app.use('/users',checkAuthorization,userRoutes);
 // app.use('/users',getAllUsers,userRoutes);
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).render('error', { message: 'Something went wrong' });
+});
 
 app.listen(PORT,() => {
     console.log(`Server has started on ${PORT}`)
