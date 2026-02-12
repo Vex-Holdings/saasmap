@@ -1,2 +1,2 @@
 [phases.install]
-cmds = ["NPM_CONFIG_PRODUCTION=false npm ci --omit=dev"]
+cmds = ["NODE_ENV=development npm ci --omit=dev"]
