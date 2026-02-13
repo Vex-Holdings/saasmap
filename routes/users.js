@@ -240,6 +240,12 @@ router.get('/videogames', async (req,res) => {
     res.render('users/videogames', {companies: companies})
 })
 
+router.get('/insurance', async (req,res) => {
+    let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'Insurance\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
+
+    res.render('users/insurance', {companies: companies})
+})
+
 router.get('/voip', async (req,res) => {
     let companies = await sequelize.query('SELECT o.id, o.orgname, o.description, o.location FROM "Organizations" o JOIN "Sectors" s ON s.orgid = o.id WHERE s.sectorname = \'VOIP\' ORDER BY o.orgname', {type: Sequelize.QueryTypes.SELECT})
 
