@@ -15,6 +15,15 @@
 
 ## Change Log
 
+### 2026-02-17 — Add SSL config for Sequelize
+
+**Problem**: Connecting to Railway Postgres via the public URL (`DATABASE_PUBLIC_URL`) from local development failed because Sequelize wasn't configured for SSL. The internal Railway URL (`postgres.railway.internal`) doesn't require SSL, but the public proxy URL does.
+
+**Solution**:
+- Added `dialectOptions.ssl` (`require: true`, `rejectUnauthorized: false`) to the `development` environment in `config/config.json`
+
+**Files changed**: `config/config.json`
+
 ### 2026-02-12 — Clean up Railway deploy warnings
 
 **Problem**: Two noisy warnings in Railway deploy logs:
