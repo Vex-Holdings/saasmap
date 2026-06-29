@@ -1,3 +1,10 @@
 https://www.linkedin.com/in/cameron-fink/
 https://www.linkedin.com/in/nedkoh
 https://www.linkedin.com/in/johncolekessler/
+https://www.linkedin.com/in/xiaohu-jason-zhang-6274b36/
+https://www.linkedin.com/in/tom-pope-979a4940/
+https://www.linkedin.com/in/ciprian-diaconasu/
+https://www.linkedin.com/in/howieliu
+https://www.linkedin.com/in/tj-ademiluyi/
+https://www.linkedin.com/in/a-akanni/
+https://www.linkedin.com/in/chris-yu-2820778
