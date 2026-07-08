@@ -8,3 +8,6 @@ https://www.linkedin.com/in/howieliu
 https://www.linkedin.com/in/tj-ademiluyi/
 https://www.linkedin.com/in/a-akanni/
 https://www.linkedin.com/in/chris-yu-2820778
+https://www.linkedin.com/in/ntraggis
+https://www.linkedin.com/in/jai-malik/
+https://www.linkedin.com/in/eli-giovanetti-62088292/
