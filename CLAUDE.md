@@ -11,7 +11,7 @@
 - **Middleware**: `middlewares/authorization.js`, `middlewares/getallusers.js`
 - **Static assets**: `css/` served at `/css`
 - **Environment**: `.env` file loaded via `dotenv` (development only); secrets (`SESSION_SECRET`, DB credentials) are in env vars
-- **Deployment**: Railway (project: `triumphant-love`, service: `saasmap`). Postgres plugin provides `DATABASE_URL`. `SESSION_SECRET` set as a service variable.
+- **Deployment**: Railway (project: `triumphant-love`, service: `saasmap`). Postgres plugin provides `DATABASE_URL`. `SESSION_SECRET` set as a service variable. Production URL: https://saasmap-production.up.railway.app. Deploy status is posted to GitHub (commit status `triumphant-love - saasmap` and the Deployments API), so deploys can be verified via `gh api` without the Railway CLI.
 
 ## Change Log
 
