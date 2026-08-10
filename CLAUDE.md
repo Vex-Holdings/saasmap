@@ -15,6 +15,18 @@
 
 ## Change Log
 
+### 2026-08-10 — Fix 11 Dependabot vulnerabilities
+**Commit**: `dfe63b9`
+
+**Problem**: GitHub flagged 11 vulnerabilities (5 high, 5 moderate, 1 low) in runtime dependencies: express/qs/body-parser/path-to-regexp, sequelize (SQL injection via JSON column cast), lodash, express-rate-limit (IPv6 rate-limit bypass), ip-address, dottie, and uuid.
+
+**Solution**:
+- `npm audit fix` updated everything semver-compatibly (express 4.22.2, sequelize 6.37.8, express-rate-limit 8.6.2, etc.)
+- The last alert (uuid < 11.1.1) is pinned by sequelize v6, and npm's only auto-fix was downgrading sequelize to v3. Added an npm `overrides` entry forcing `uuid ^11.1.1` instead — sequelize only uses uuid's `v1`/`v4` exports, unchanged in uuid 11. If a future sequelize upgrade requires a different uuid, this override may need revisiting.
+- Verified: `npm audit` clean, app boots, `/` and `/login` return 200, Dependabot shows 0 open alerts.
+
+**Files changed**: `package.json`, `package-lock.json`
+
 ### 2026-02-17 — Add SSL config for Sequelize
 
 **Problem**: Connecting to Railway Postgres via the public URL (`DATABASE_PUBLIC_URL`) from local development failed because Sequelize wasn't configured for SSL. The internal Railway URL (`postgres.railway.internal`) doesn't require SSL, but the public proxy URL does.
