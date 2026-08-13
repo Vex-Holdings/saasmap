@@ -44,20 +44,20 @@ The portfolio lists are JavaScript-rendered — use browser automation (Claude i
 Per-source notes:
 - a16z (`a16z.com/portfolio/?status=Active`): already filtered to Active; expect hundreds of entries.
 - Sequoia (`sequoiacap.com/our-companies/#all-panel`): use the "all" panel; expect hundreds.
-- Greylock (`greylock.com/portfolio/`): grid of cards; expect 100+.
+- Greylock (`greylock.com/portfolio/`): Next.js table, not a card grid. Company rows are `li` elements with class `border-b`; the company name is the row's `img[alt]` (strip a trailing " logo" and collapse whitespace). The listing page has NO external company links — websites live on each `/portfolio/<slug>/` detail page in a `<script type="application/ld+json">` Organization block; filter for the block whose `@id` contains `/portfolio/` (each page has two Organization blocks; the other one returns greylock.com for every company). Fetching detail pages same-origin via `fetch()` inside browser JS with modest concurrency takes ~30s for ~158 companies. Expect ~150+ entries; defunct companies (e.g. Houseparty, Neeva) have no URL — treat as name-only.
 
 **Sanity check:** if a source yields fewer than 20 companies, assume the scrape failed (layout change, block, partial render). Warn the user, report the count, and continue with the other sources and discard that source's partial results — never treat an empty or tiny scrape as "no new companies."
 
 ### 3. Diff
 
-Normalize every domain (scraped and DB `website` values) before comparing: lowercase, strip protocol, `www.`, path, and trailing slash — compare bare hostnames (e.g. `https://www.Foo.com/about` → `foo.com`).
+Normalize every domain (scraped and DB `website` values) before comparing: lowercase, strip protocol, `www.`, path, and trailing slash — compare bare hostnames (e.g. `https://www.Foo.com/about` → `foo.com`). Some company URLs are subdomains (e.g. `about.roblox.com`) — when a bare-hostname comparison misses, also compare registrable domains (`roblox.com`) before declaring a company missing.
 
-A scraped company is **missing** when:
-- its domain is not among normalized DB `website` domains (primary signal), AND
-- its domain is not on the skip list, AND
-- its name has no case-insensitive match in DB `orgname` (secondary signal, checked for every entry — guards against DB rows with an empty `website`).
+For entries **with a domain**, domain match is the primary and only automatic exclusion signal:
+- its domain is among normalized DB `website` domains → not missing.
+- its domain is on the skip list → not missing.
+- otherwise it's missing — even if its name case-insensitively matches a DB `orgname`, since a name match with a different domain can be a distinct company (e.g. Greylock's "Ava" at `meetava.com` vs. an unrelated DB "Ava" at `ava.me`). In that case include it in the missing list flagged as "possible duplicate of \<DB org\>" so the human decides at review — silent exclusion is worse than a duplicate caught there.
 
-Companies whose portfolio card has no website link and whose name doesn't match: try a quick WebSearch for their site. If still no domain, append them to `views/vcsource-skiplist.md` as `<name> — no website found — YYYY-MM-DD` (name in place of domain) so they don't resurface next run, and mention them once in the run summary.
+For entries **without a domain**, keep name-based handling: a case-insensitive match in DB `orgname` excludes it as not missing; otherwise try a quick WebSearch for their site. If still no domain, append them to `views/vcsource-skiplist.md` as `<name> — no website found — YYYY-MM-DD` (name in place of domain) so they don't resurface next run, and mention them once in the run summary.
 
 ### 4. Report and select
 
