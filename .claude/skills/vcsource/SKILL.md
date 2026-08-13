@@ -67,11 +67,11 @@ Show the user the full missing list with per-source counts. Then select the firs
 
 For each selected company, WebFetch its website:
 
-- **Pass:** site loads and shows no shutdown or acquisition signals.
-- **Fail:** site unreachable, redirects to a different company's domain (acquirer), or shows a "we've joined X" / sunset / shutdown notice. A redirect that is just a rebrand of the same company (not an acquirer) is a pass.
+- **Pass:** site loads, shows no shutdown or acquisition signals, and the company is not publicly traded.
+- **Fail:** site unreachable, redirects to a different company's domain (acquirer), shows a "we've joined X" / sunset / shutdown notice, or the company is publicly listed on a stock exchange (IPO'd — check for a ticker via WebSearch when the company looks large or mature). A redirect that is just a rebrand of the same company (not an acquirer) is a pass.
 - **Ambiguous** (loads but looks stale or moribund): pass it through — the batch review below is the human gate.
 
-WebFetch is unreliable on JS-heavy sites, so before recording a `site unreachable` failure, confirm it in the browser session already open from the scrape step; if the site loads there, treat it as a pass instead. Append each confirmed failure to `views/vcsource-skiplist.md` as `domain — reason — YYYY-MM-DD` (reasons: `site unreachable`, `acquired by <name>`, `shut down`). Tell the user which companies failed and why.
+WebFetch is unreliable on JS-heavy sites, so before recording a `site unreachable` failure, confirm it in the browser session already open from the scrape step; if the site loads there, treat it as a pass instead. Append each confirmed failure to `views/vcsource-skiplist.md` as `domain — reason — YYYY-MM-DD` (reasons: `site unreachable`, `acquired by <name>`, `shut down`, `publicly listed`). Tell the user which companies failed and why.
 
 ### 6. Enqueue and hand off to addcompany
 
