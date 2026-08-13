@@ -1,7 +1,7 @@
 # vcsource Skill — Design Spec
 
 **Date:** 2026-08-13
-**Status:** Approved for planning
+**Status:** Implemented (2026-08-13). The delivered skill at `.claude/skills/vcsource/SKILL.md` includes post-smoke-test refinements not reflected below (possible-duplicate flagging instead of blanket name matching, browser-confirmed precheck failures, Greylock detail-page scrape mechanics, permanent skip for no-website companies) — the skill file is the source of truth.
 
 ## Purpose
 

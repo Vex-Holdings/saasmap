@@ -23,7 +23,7 @@
 - Added `views/vcsource-skiplist.md` — permanent skip list (`domain — reason — date`) for precheck failures and review rejections.
 - Design spec: `docs/superpowers/specs/2026-08-13-vcsource-design.md`
 
-**Files changed**: `.claude/skills/vcsource/SKILL.md` (new), `views/vcsource-skiplist.md` (new), `CLAUDE.md`
+**Files changed**: `.claude/skills/vcsource/SKILL.md` (new), `views/vcsource-skiplist.md` (new), `docs/superpowers/specs/2026-08-13-vcsource-design.md` (new), `docs/superpowers/plans/2026-08-13-vcsource.md` (new), `CLAUDE.md`
 
 ### 2026-08-10 — Fix 11 Dependabot vulnerabilities
 **Commit**: `dfe63b9`
