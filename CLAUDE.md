@@ -15,6 +15,16 @@
 
 ## Change Log
 
+### 2026-08-13 — Add vcsource skill
+**Problem**: Adding companies from VC portfolio sites was manual — no repeatable way to discover which a16z/Sequoia/Greylock portfolio companies are missing from the Organizations table.
+
+**Solution**:
+- Added `.claude/skills/vcsource/SKILL.md` — recurring `/vcsource` workflow: browser-scrape the portfolio pages in `views/vcsource.md`, diff against `Organizations` by normalized domain, precheck up to 25 missing companies per run (site alive + still independent), enqueue survivors to `views/companiestoadd.md`, and hand off to the `/addcompany` batch workflow for research, review, and insert.
+- Added `views/vcsource-skiplist.md` — permanent skip list (`domain — reason — date`) for precheck failures and review rejections.
+- Design spec: `docs/superpowers/specs/2026-08-13-vcsource-design.md`
+
+**Files changed**: `.claude/skills/vcsource/SKILL.md` (new), `views/vcsource-skiplist.md` (new), `CLAUDE.md`
+
 ### 2026-08-10 — Fix 11 Dependabot vulnerabilities
 **Commit**: `dfe63b9`
 
