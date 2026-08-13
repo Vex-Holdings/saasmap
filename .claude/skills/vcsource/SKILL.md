@@ -20,7 +20,7 @@ Recurring discovery workflow. Scrapes the VC portfolio pages listed in `views/vc
 ### 1. Load state
 
 - Read `views/vcsource.md` for source URLs (lines starting with `http`).
-- Read `views/vcsource-skiplist.md`; collect skipped domains.
+- Read `views/vcsource-skiplist.md`; collect skipped domains and names.
 - Query existing organizations (run from project root; stop the whole run if this fails — the diff is meaningless without it):
 
 ```bash
