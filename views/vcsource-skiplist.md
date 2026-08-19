@@ -35,3 +35,7 @@ apple.com — publicly listed — 2026-08-13
 arista.com — publicly listed — 2026-08-13
 atari.com — publicly listed — 2026-08-13
 aurora.tech — publicly listed — 2026-08-13
+avinetworks.com — acquired by VMware — 2026-08-19
+awakesecurity.com — acquired by Arista — 2026-08-19
+yupp.ai — shut down — 2026-08-19
+barracuda.com — rejected at review — 2026-08-19
