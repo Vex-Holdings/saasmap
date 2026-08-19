@@ -57,3 +57,10 @@ capriza.com — shut down — 2026-08-19
 getcatch.com — shut down — 2026-08-19
 eveonline.com — duplicate of fenris.com — 2026-08-19
 censys.io — duplicate of censys.com — 2026-08-19
+cisco.com — publicly listed — 2026-08-19
+clever.com — acquired by Kahoot! — 2026-08-19
+claim.co — acquired by Wonder — 2026-08-19
+clipboardhealth.com — duplicate of clipboardworks.com — 2026-08-19
+usecocreate.io — duplicate of cocreate.ink — 2026-08-19
+cloudera.com — rejected at review — 2026-08-19
+citadelsecurities.com — rejected at review — 2026-08-19
