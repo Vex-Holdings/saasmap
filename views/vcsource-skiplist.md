@@ -39,3 +39,10 @@ avinetworks.com — acquired by VMware — 2026-08-19
 awakesecurity.com — acquired by Arista — 2026-08-19
 yupp.ai — shut down — 2026-08-19
 barracuda.com — rejected at review — 2026-08-19
+bastion.io — duplicate of bastion.com — 2026-08-19
+bird.co — acquired by Third Lane Mobility — 2026-08-19
+bitski.com — acquired by Phantom — 2026-08-19
+blend.com — publicly listed — 2026-08-19
+block.xyz — publicly listed — 2026-08-19
+bridge.xyz — acquired by Stripe — 2026-08-19
+bridgebio.com — publicly listed — 2026-08-19
