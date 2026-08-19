@@ -64,3 +64,11 @@ clipboardhealth.com — duplicate of clipboardworks.com — 2026-08-19
 usecocreate.io — duplicate of cocreate.ink — 2026-08-19
 cloudera.com — rejected at review — 2026-08-19
 citadelsecurities.com — rejected at review — 2026-08-19
+confluent.io — acquired by IBM — 2026-08-19
+crewapp.com — acquired by Block — 2026-08-19
+cyngn.com — publicly listed — 2026-08-19
+cove.ai — acquired by Microsoft — 2026-08-19
+createra.fun — site unreachable — 2026-08-19
+cultofthenorth.com — site unreachable — 2026-08-19
+wearecurie.ai — site unreachable — 2026-08-19
+goculturewireless.com — duplicate of culturewireless.com — 2026-08-19
