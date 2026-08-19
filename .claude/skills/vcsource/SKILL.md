@@ -77,6 +77,8 @@ WebFetch is unreliable on JS-heavy sites, so before recording a `site unreachabl
 
 Append the precheck survivors' websites (one URL per line) to `views/companiestoadd.md`, then invoke the `addcompany` skill (via the Skill tool) and follow its documented batch workflow there rather than relying on any summary of it here.
 
+If a survivor's canonical URL differs from the domain the VC site listed (rebrand redirect, e.g. blues.io → blues.com), enqueue the canonical URL AND append the scraped domain to the skip list as `<scraped domain> — duplicate of <canonical domain> — YYYY-MM-DD` — otherwise the next run re-flags the old domain as missing.
+
 ### 7. Record rejections
 
 Any company the user rejects at batch review: remove it from `views/companiestoadd.md` AND append it to the skip list as `domain — rejected at review — YYYY-MM-DD` so it never resurfaces.

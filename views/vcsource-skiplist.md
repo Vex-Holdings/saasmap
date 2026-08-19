@@ -46,3 +46,14 @@ blend.com — publicly listed — 2026-08-19
 block.xyz — publicly listed — 2026-08-19
 bridge.xyz — acquired by Stripe — 2026-08-19
 bridgebio.com — publicly listed — 2026-08-19
+blues.io — duplicate of blues.com — 2026-08-19
+breeze.cash — duplicate of breeze.com — 2026-08-19
+catenalabs.com — duplicate of catena.com — 2026-08-19
+cadence.com — publicly listed — 2026-08-19
+cadre.com — acquired by Yieldstreet — 2026-08-19
+cafepress.com — acquired by PlanetArt — 2026-08-19
+shopcanal.com — acquired by Rokt — 2026-08-19
+capriza.com — shut down — 2026-08-19
+getcatch.com — shut down — 2026-08-19
+eveonline.com — duplicate of fenris.com — 2026-08-19
+censys.io — duplicate of censys.com — 2026-08-19
